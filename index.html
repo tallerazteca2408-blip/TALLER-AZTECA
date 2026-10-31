@@ -1,101 +1,376 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#171717">
-<title>Taller Azteca</title>
-<style>
-:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color-scheme:light;--red:#b82025;--gold:#f5c542;--ink:#171717;--paper:#f5f5f5;--line:#dedede}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#202020}header{background:var(--ink);color:white;padding:18px 16px 16px;position:sticky;top:0;z-index:5}header .brand{display:flex;align-items:center;gap:12px}.logo{background:#000;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;overflow:hidden;border:1px solid #b82025}.logo img{width:100%;height:100%;object-fit:cover}h1{font-size:21px;letter-spacing:.5px;margin:0}header small{color:var(--gold);font-weight:700;letter-spacing:1.4px}.wrap{max-width:760px;margin:auto;padding:14px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.stat{background:#292929;color:white;padding:12px 10px;border-radius:12px;min-width:0}.stat small{display:block;color:#ccc;font-size:11px}.stat strong{font-size:clamp(16px,4vw,21px);display:block;margin-top:4px;overflow-wrap:anywhere}.stat:nth-child(2) strong{color:var(--gold)}nav{display:flex;gap:8px;margin:12px 0}button,.tab{border:0;border-radius:10px;padding:12px 14px;font:inherit;font-weight:650;cursor:pointer}.tab{flex:1;background:#e4e4e4;color:#333}.tab.active{background:var(--red);color:white}.panel,.card{background:white;border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:12px}.panel h2{font-size:18px;margin:0 0 14px}.field{margin:10px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #cfcfcf;border-radius:9px;font:inherit;background:white;color:#222}.field textarea{min-height:78px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.total{display:flex;justify-content:space-between;align-items:center;background:#f1f1f1;padding:14px;border-radius:10px;margin:12px 0}.total strong{font-size:25px;color:#167342}.primary{background:var(--red);color:white;width:100%;margin-top:8px}.secondary{background:#eee;color:#222}.danger{background:#fff0f0;color:#a31920}.muted{color:#666;font-size:12px}.record{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0;background:white}.record-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.record h3{font-size:16px;margin:0}.pill{font-size:11px;font-weight:800;border-radius:20px;padding:5px 9px;background:#e4f5e9;color:#176b36}.pill.pending{background:#fff2d2;color:#805600}.record p{margin:7px 0;font-size:14px}.record .money{display:flex;justify-content:space-between;border-top:1px solid #eee;padding-top:9px;margin-top:9px;font-weight:700}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1;padding:9px;font-size:12px}.hidden{display:none!important}.empty{text-align:center;padding:30px 12px;color:#666}.tools{display:flex;gap:8px;flex-wrap:wrap}.tools button{flex:1;font-size:13px}.notice{font-size:12px;color:#666;line-height:1.5;margin:12px 2px}footer{text-align:center;color:#777;font-size:12px;padding:15px}
-@media(max-width:380px){.row{grid-template-columns:1fr}.stats{gap:5px}.stat{padding:10px 7px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b5121b">
+  <meta name="description" content="Taller Azteca: registro de clientes, servicios, refacciones y cobros de motocicletas.">
+  <link rel="manifest" href="./manifest.json">
+  <title>Taller Azteca</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 5px;
+      border-bottom: 3px solid #b5121b;
+    }
+
+    h1 {
+      color: #e6b52b;
+      margin: 5px;
+      font-size: 28px;
+    }
+
+    h2 {
+      color: #e6b52b;
+      font-size: 20px;
+    }
+
+    .panel {
+      background: #222;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 18px;
+    }
+
+    input, textarea, select, button {
+      width: 100%;
+      padding: 13px;
+      margin: 7px 0;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    input, textarea, select {
+      background: #333;
+      color: white;
+      border: 1px solid #555;
+    }
+
+    button {
+      background: #b5121b;
+      color: white;
+      border: 0;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      opacity: .8;
+    }
+
+    .registro {
+      background: #333;
+      padding: 13px;
+      border-radius: 8px;
+      margin: 12px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .total {
+      color: #e6b52b;
+      font-size: 27px;
+      font-weight: bold;
+    }
+
+    .secundario {
+      background: #555;
+    }
+
+    .pagado {
+      color: #65d98a;
+      font-weight: bold;
+    }
+
+    .pendiente {
+      color: #ffcc66;
+      font-weight: bold;
+    }
+
+    small {
+      color: #bbb;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 8px;
+    }
+
+    .acciones button {
+      flex: 1;
+    }
+  </style>
 </head>
+
 <body>
-<header><div class="brand"><div class="logo"><img src="logo.png" alt="Logo Taller Azteca"></div><div><h1>TALLER AZTECA</h1><small>CONTROL DE SERVICIOS</small></div></div></header>
-<main class="wrap">
-<section class="stats">
- <div class="stat"><small>Cobrado</small><strong id="paid">$0</strong></div>
- <div class="stat"><small>Pendiente</small><strong id="pending">$0</strong></div>
- <div class="stat"><small>Servicios</small><strong id="count">0</strong></div>
-</section>
-<nav><button class="tab active" id="newTab">＋ Nuevo trabajo</button><button class="tab" id="historyTab">Historial</button></nav>
-<section class="panel" id="newPanel">
-<h2>Registrar servicio</h2>
-<form id="serviceForm">
-<div class="field"><label for="client">Nombre del cliente *</label><input id="client" required placeholder="Ej. Juan Pérez"></div>
-<div class="field"><label for="phone">Teléfono</label><input id="phone" type="tel" placeholder="Número de teléfono"></div>
-<div class="field"><label for="moto">Motocicleta *</label><input id="moto" required placeholder="Ej. Italika FT150"></div>
-<div class="field"><label for="work">Trabajo realizado *</label><textarea id="work" required placeholder="Ej. Cambio de aceite, ajuste de cadena y limpieza de carburador"></textarea></div>
-<div class="row">
- <div class="field"><label for="labor">Mano de obra ($)</label><input id="labor" type="number" min="0" step="0.01" value="0"></div>
- <div class="field"><label for="parts">Refacciones ($)</label><input id="parts" type="number" min="0" step="0.01" value="0"></div>
-</div>
-<div class="total"><span>Total del servicio</span><strong id="total">$0.00</strong></div>
-<div class="row">
- <div class="field"><label for="payment">Forma de pago</label><select id="payment"><option>Efectivo</option><option>Tarjeta</option><option>Transferencia</option></select></div>
- <div class="field"><label for="status">Estado del cobro</label><select id="status"><option>Pagado</option><option>Pendiente</option></select></div>
-</div>
-<button class="primary" type="submit">Guardar servicio</button>
-</form>
-</section>
-<section class="panel hidden" id="historyPanel">
-<h2>Historial de trabajos</h2>
-<div class="tools">
-<button class="secondary" id="exportBtn">Exportar respaldo</button>
-<button class="secondary" id="csvBtn">Descargar CSV</button>
-<button class="secondary" id="importBtn">Importar respaldo</button>
-<input class="hidden" id="importFile" type="file" accept="application/json,.json">
-</div>
-<div id="records"></div>
-</section>
-<p class="notice">Tus registros se guardan en el almacenamiento de este navegador en este dispositivo. Haz un respaldo periódicamente con “Exportar respaldo”; si borras los datos del navegador o cambias de celular, puedes perderlos si no tienes una copia.</p>
-<footer>🏍️ Taller Azteca · Tu moto en buenas manos</footer>
-</main>
-<script>
-const $=id=>document.getElementById(id);
-const money=n=>new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(Number(n)||0);
-let records=[];
-try{records=JSON.parse(localStorage.getItem('tallerAztecaRecords')||'[]');if(!Array.isArray(records))records=[]}catch(e){records=[]}
-function save(){localStorage.setItem('tallerAztecaRecords',JSON.stringify(records));render()}
-function calc(){$('total').textContent=money((Number($('labor').value)||0)+(Number($('parts').value)||0))}
-$('labor').addEventListener('input',calc);$('parts').addEventListener('input',calc);
-function render(){
- const paid=records.filter(r=>r.status==='Pagado').reduce((s,r)=>s+Number(r.total),0);
- const pending=records.filter(r=>r.status==='Pendiente').reduce((s,r)=>s+Number(r.total),0);
- $('paid').textContent=money(paid);$('pending').textContent=money(pending);$('count').textContent=records.length;
- $('records').innerHTML='';
- if(!records.length){$('records').innerHTML='<div class="empty">🧾<p>Aún no hay servicios registrados.</p>Agrega tu primer trabajo desde “Nuevo trabajo”.</div>';return}
- [...records].sort((a,b)=>b.id-a.id).forEach(r=>{
-  const el=document.createElement('article');el.className='record';
-  const top=document.createElement('div');top.className='record-top';
-  const h=document.createElement('h3');h.textContent=r.client;
-  const badge=document.createElement('span');badge.className='pill'+(r.status==='Pendiente'?' pending':'');badge.textContent=r.status;
-  top.append(h,badge);el.append(top);
-  const p1=document.createElement('p');p1.className='muted';p1.textContent=`${r.date} · ${r.moto} · ${r.payment}`;
-  const p2=document.createElement('p');p2.textContent=r.work;
-  const p3=document.createElement('p');p3.className='muted';p3.textContent=`Teléfono: ${r.phone||'No registrado'} · Mano de obra: ${money(r.labor)} · Refacciones: ${money(r.parts)}`;
-  const total=document.createElement('div');total.className='money';const a=document.createElement('span');a.textContent='Total';const b=document.createElement('span');b.textContent=money(r.total);total.append(a,b);
-  el.append(p1,p2,p3,total);
-  const actions=document.createElement('div');actions.className='actions';
-  if(r.status==='Pendiente'){const paidBtn=document.createElement('button');paidBtn.className='secondary';paidBtn.textContent='Marcar pagado';paidBtn.onclick=()=>{r.status='Pagado';save()};actions.append(paidBtn)}
-  const del=document.createElement('button');del.className='danger';del.textContent='Eliminar';del.onclick=()=>{if(confirm('¿Eliminar este registro?')){records=records.filter(x=>x.id!==r.id);save()}};actions.append(del);el.append(actions);$('records').append(el);
- });
-}
-function tab(which){const isNew=which==='new';$('newPanel').classList.toggle('hidden',!isNew);$('historyPanel').classList.toggle('hidden',isNew);$('newTab').classList.toggle('active',isNew);$('historyTab').classList.toggle('active',!isNew);if(!isNew)render()}
-$('newTab').onclick=()=>tab('new');$('historyTab').onclick=()=>tab('history');
-$('serviceForm').addEventListener('submit',e=>{
- e.preventDefault();const labor=Number($('labor').value)||0,parts=Number($('parts').value)||0,total=labor+parts;
- if(total<=0){alert('Ingresa un cobro mayor que cero.');return}
- records.push({id:Date.now(),client:$('client').value.trim(),phone:$('phone').value.trim(),moto:$('moto').value.trim(),work:$('work').value.trim(),labor,parts,total,payment:$('payment').value,status:$('status').value,date:new Date().toLocaleDateString('es-MX')});
- save();e.target.reset();$('labor').value='0';$('parts').value='0';calc();tab('history');alert('Servicio guardado.');
-});
-$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});download(blob,'respaldo-taller-azteca.json')};
-$('csvBtn').onclick=()=>{const cols=['Fecha','Cliente','Telefono','Motocicleta','Trabajo','Mano de obra','Refacciones','Total','Forma de pago','Estado'];const rows=records.map(r=>[r.date,r.client,r.phone,r.moto,r.work,r.labor,r.parts,r.total,r.payment,r.status]);const csv=[cols,...rows].map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');download(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),'taller-azteca-servicios.csv')};
-function download(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-$('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!Array.isArray(data))throw Error();if(confirm('La importación reemplazará los registros actuales. ¿Continuar?')){records=data;save();alert('Respaldo importado.')}}catch(err){alert('El archivo no es un respaldo válido de Taller Azteca.')}e.target.value=''};
-calc();render();
-</script>
+
+  <header>
+    <h1>🏍️ TALLER AZTECA</h1>
+    <p>Tu moto en buenas manos</p>
+    <small>Control de servicios y cobros</small>
+  </header>
+
+  <section class="panel">
+    <h2>Registrar servicio</h2>
+
+    <input id="cliente" placeholder="Nombre del cliente">
+    <input id="telefono" type="tel" placeholder="Teléfono del cliente">
+    <input id="moto" placeholder="Motocicleta y modelo">
+
+    <textarea id="trabajo" rows="3"
+      placeholder="Trabajo realizado"></textarea>
+
+    <input id="refacciones" type="number" min="0" step="0.01"
+      placeholder="Costo de refacciones ($)">
+
+    <input id="mano" type="number" min="0" step="0.01"
+      placeholder="Mano de obra ($)">
+
+    <button onclick="guardar()">GUARDAR SERVICIO</button>
+  </section>
+
+  <section class="panel">
+    <h2>Resumen de cobros</h2>
+
+    <p>Total de servicios:</p>
+    <div class="total" id="total">$0.00</div>
+
+    <p id="cantidad">0 servicios registrados</p>
+
+    <p>Dinero cobrado:</p>
+    <div class="total" id="cobrado">$0.00</div>
+
+    <p>Dinero pendiente:</p>
+    <div class="total" id="pendiente">$0.00</div>
+  </section>
+
+  <section class="panel">
+    <h2>Historial de trabajos</h2>
+    <div id="historial"></div>
+  </section>
+
+  <script>
+    let servicios = [];
+
+    try {
+      servicios = JSON.parse(
+        localStorage.getItem("azteca_servicios") || "[]"
+      );
+
+      if (!Array.isArray(servicios)) servicios = [];
+    } catch (error) {
+      servicios = [];
+    }
+
+    function dinero(cantidad) {
+      return Number(cantidad).toLocaleString("es-MX", {
+        style: "currency",
+        currency: "MXN"
+      });
+    }
+
+    function guardar() {
+      const cliente = document.getElementById("cliente").value.trim();
+      const telefono = document.getElementById("telefono").value.trim();
+      const moto = document.getElementById("moto").value.trim();
+      const trabajo = document.getElementById("trabajo").value.trim();
+
+      const refacciones = Number(
+        document.getElementById("refacciones").value || 0
+      );
+
+      const mano = Number(
+        document.getElementById("mano").value || 0
+      );
+
+      if (!cliente || !moto || !trabajo) {
+        alert("Completa el cliente, la motocicleta y el trabajo.");
+        return;
+      }
+
+      if (
+        !Number.isFinite(refacciones) ||
+        !Number.isFinite(mano) ||
+        refacciones < 0 ||
+        mano < 0
+      ) {
+        alert("Revisa los costos ingresados.");
+        return;
+      }
+
+      const servicio = {
+        id: Date.now(),
+        cliente: cliente,
+        telefono: telefono,
+        moto: moto,
+        trabajo: trabajo,
+        refacciones: refacciones,
+        mano: mano,
+        total: refacciones + mano,
+        fecha: new Date().toLocaleDateString("es-MX"),
+        pagado: false
+      };
+
+      servicios.unshift(servicio);
+
+      if (!guardarDatos()) {
+        servicios.shift();
+        return;
+      }
+
+      [
+        "cliente",
+        "telefono",
+        "moto",
+        "trabajo",
+        "refacciones",
+        "mano"
+      ].forEach(id => {
+        document.getElementById(id).value = "";
+      });
+
+      mostrar();
+      alert("¡Servicio guardado correctamente!");
+    }
+
+    function guardarDatos() {
+      try {
+        localStorage.setItem(
+          "azteca_servicios",
+          JSON.stringify(servicios)
+        );
+        return true;
+      } catch (error) {
+        alert("No se pudieron guardar los datos. Revisa el espacio disponible.");
+        return false;
+      }
+    }
+
+    function marcarPagado(id) {
+      const servicio = servicios.find(s => s.id === id);
+
+      if (!servicio) return;
+
+      servicio.pagado = true;
+
+      if (guardarDatos()) {
+        mostrar();
+      }
+    }
+
+    function eliminar(id) {
+      if (!confirm("¿Quieres eliminar este servicio?")) return;
+
+      const anteriores = servicios;
+      servicios = servicios.filter(s => s.id !== id);
+
+      if (!guardarDatos()) {
+        servicios = anteriores;
+        return;
+      }
+
+      mostrar();
+    }
+
+    function mostrar() {
+      const historial = document.getElementById("historial");
+
+      historial.innerHTML = "";
+
+      let total = 0;
+      let cobrado = 0;
+      let pendiente = 0;
+
+      servicios.forEach(servicio => {
+        total += servicio.total;
+
+        if (servicio.pagado) {
+          cobrado += servicio.total;
+        } else {
+          pendiente += servicio.total;
+        }
+
+        const tarjeta = document.createElement("div");
+        tarjeta.className = "registro";
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = servicio.cliente;
+
+        const datos = document.createElement("p");
+        datos.textContent =
+          "Fecha: " + servicio.fecha +
+          "\nMoto: " + servicio.moto +
+          "\nTeléfono: " + (servicio.telefono || "No registrado") +
+          "\nTrabajo: " + servicio.trabajo +
+          "\nRefacciones: " + dinero(servicio.refacciones) +
+          "\nMano de obra: " + dinero(servicio.mano) +
+          "\nTotal: " + dinero(servicio.total);
+
+        datos.style.whiteSpace = "pre-line";
+
+        const estado = document.createElement("p");
+        estado.textContent = servicio.pagado ? "PAGADO" : "PENDIENTE DE PAGO";
+        estado.className = servicio.pagado ? "pagado" : "pendiente";
+
+        tarjeta.appendChild(titulo);
+        tarjeta.appendChild(datos);
+        tarjeta.appendChild(estado);
+
+        const acciones = document.createElement("div");
+        acciones.className = "acciones";
+
+        if (!servicio.pagado) {
+          const botonPago = document.createElement("button");
+          botonPago.textContent = "Registrar pago";
+          botonPago.onclick = () => marcarPagado(servicio.id);
+          acciones.appendChild(botonPago);
+        }
+
+        const botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "Eliminar";
+        botonEliminar.className = "secundario";
+        botonEliminar.onclick = () => eliminar(servicio.id);
+
+        acciones.appendChild(botonEliminar);
+        tarjeta.appendChild(acciones);
+
+        historial.appendChild(tarjeta);
+      });
+
+      document.getElementById("total").textContent = dinero(total);
+      document.getElementById("cobrado").textContent = dinero(cobrado);
+      document.getElementById("pendiente").textContent = dinero(pendiente);
+
+      document.getElementById("cantidad").textContent =
+        servicios.length + " servicios registrados";
+
+      if (servicios.length === 0) {
+        historial.textContent = "Todavía no hay servicios registrados.";
+      }
+    }
+
+    mostrar();
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js")
+          .catch(error => console.log("Service Worker:", error));
+      });
+    }
+  </script>
+
 </body>
 </html>
